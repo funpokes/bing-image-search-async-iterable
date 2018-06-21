@@ -11,11 +11,13 @@ const defaults = {
   amount: 2000,
   fetchCb: fetch,
 };
-const apiKeyHeaderName = 'Ocp-Apim-Subscription-Key';
-const clientIDHeaderName = 'X-MSEdge-ClientID';
-const clientIPHeaderName = 'X-MSEdge-ClientIP';
-const locationHeaderName = 'X-Search-Location';
-const acceptHeaderName = 'Accept';
+const HEADERS = {
+  API_KEY:      'Ocp-Apim-Subscription-Key',
+  CLIENT_ID:    'X-MSEdge-ClientID',
+  CLIENT_IP:    'X-MSEdge-ClientIP',
+  LOCATION:     'X-Search-Location',
+  ACCEPT:       'Accept',
+};
 const acceptHeaderValue = 'application/json';
 
 function filterNulls(obj) {
@@ -63,11 +65,11 @@ export default async function* search(options) {
       ...queryParams,
     });
     const requestHeaders = filterNulls({
-      [apiKeyHeaderName]:   key,
-      [clientIDHeaderName]: clientID,
-      [clientIPHeaderName]: clientIP,
-      [locationHeaderName]: location,
-      [acceptHeaderName]: acceptHeaderValue,
+      [HEADERS.API_KEY]:      key,
+      [HEADERS.CLIENT_ID]:    clientID,
+      [HEADERS.CLIENT_IP]:    clientIP,
+      [HEADERS.LOCATION]:     location,
+      [HEADERS.ACCEPT]:       acceptHeaderValue,
       ...headerParams,
     });
     const requestOptions = {
@@ -82,7 +84,7 @@ export default async function* search(options) {
     currOffset = body.nextOffset;
     currAmount -= body.value.length;
     available = body.totalEstimatedMatches;
-    clientID = clientID === undefined ? response.headers.get(clientIDHeaderName) : clientID;
+    clientID = clientID === undefined ? response.headers.get(HEADERS.CLIENT_ID) : clientID;
     yield body;
   }
 }
