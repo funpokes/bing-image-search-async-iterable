@@ -47,7 +47,7 @@ export default async function* search(options) {
   let currOffset = offset;
   let currAmount = amount;
   let available = currOffset + currAmount;
-  let clientID = null;
+  let clientID = options.clientID;
 
   while (currOffset < Math.min(currOffset + currAmount, available)) {
     const requestParams = filterNulls({
@@ -76,7 +76,7 @@ export default async function* search(options) {
     currOffset = body.nextOffset;
     currAmount -= body.value.length;
     available = body.totalEstimatedMatches;
-    clientID = response.headers.get(clientIDHeaderName);
+    clientID = clientID === undefined ? response.headers.get(clientIDHeaderName) : clientID;
     yield body;
   }
 }
