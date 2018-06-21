@@ -65,6 +65,7 @@ const search = require('bing-image-search-async-iterator');
 | offset       | `integer`  | `0`            | [Offset](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#offset) of the initial API call |
 | count        | `integer`  | `150`          | [Count](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#count) of results per API call (lower this value may result in more API calls) |
 | clientID     | `string`   |                | API request header [`X-MSEdge-ClientID`](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#clientid) (auto-determined if not set) |
+| clientIP     | `string`   |                | API request header [`X-MSEdge-ClientIP`](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#clientip) |
 | queryParams  | `object`   |                | Additional query params (e.g., `{ imageType: "AnimatedGif" }`) |
 | headerParams | `object`   |                | Additional header params (e.g., `{ Pragma: "no-cache" }`) |
 | fetchCb      | `function` |                [`fetch`](https://github.com/bitinn/node-fetch) | Callback to construct a request that returns a response promise |
