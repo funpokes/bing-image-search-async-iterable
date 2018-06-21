@@ -14,6 +14,7 @@ const defaults = {
 const apiKeyHeaderName = 'Ocp-Apim-Subscription-Key';
 const clientIDHeaderName = 'X-MSEdge-ClientID';
 const clientIPHeaderName = 'X-MSEdge-ClientIP';
+const locationHeaderName = 'X-Search-Location';
 const acceptHeaderName = 'Accept';
 const acceptHeaderValue = 'application/json';
 
@@ -42,6 +43,7 @@ export default async function* search(options) {
     count,
     amount,
     clientIP,
+    location,
     queryParams,
     headerParams,
     fetchCb,
@@ -64,6 +66,7 @@ export default async function* search(options) {
       [apiKeyHeaderName]:   key,
       [clientIDHeaderName]: clientID,
       [clientIPHeaderName]: clientIP,
+      [locationHeaderName]: location,
       [acceptHeaderName]: acceptHeaderValue,
       ...headerParams,
     });
