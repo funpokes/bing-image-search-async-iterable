@@ -32,11 +32,18 @@ function stringify(obj) {
 }
 
 export default async function* search(options) {
-  const { key, query, market, safeSearch, offset, count, amount, fetchCb } = Object.assign(
-    { },
-    defaults,
-    options,
-  );
+  const {
+    key,
+    query,
+    market,
+    safeSearch,
+    offset,
+    count,
+    amount,
+    queryParams,
+    headerParams,
+    fetchCb,
+  } = Object.assign({ }, defaults, options);
   let currOffset = offset;
   let currAmount = amount;
   let available = currOffset + currAmount;
@@ -49,11 +56,13 @@ export default async function* search(options) {
       safeSearch,
       offset: currOffset,
       count: Math.min(count, Math.min(currOffset + currAmount, available) - currOffset),
+      ...queryParams,
     });
     const requestHeaders = filterNulls({
       [apiKeyHeaderName]:   key,
       [clientIDHeaderName]: clientID,
       [acceptHeaderName]: acceptHeaderValue,
+      ...headerParams,
     });
     const requestOptions = {
       method: 'GET',
