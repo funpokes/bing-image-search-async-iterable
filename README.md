@@ -58,6 +58,7 @@ const search = require('bing-image-search-async-iterator');
 
 ### Basic Options
 These are the main parameters you should specify.
+
 | Parameter    | Type       | Default        | Description                                                        |
 | ------------ | ---------- | -------------- | ------------------------------------------------------------------ |
 | key          | `string`   |                | **(Required)** [Bing Image Search API](https://azure.microsoft.com/en-us/services/cognitive-services/bing-image-search-api/) Subscription Key |
@@ -68,6 +69,7 @@ These are the main parameters you should specify.
 
 ### Filtering Options
 You may specify your search query's filters with the following settings.
+
 | Parameter    | Type       | Default        | Description                                                        |
 | ------------ | ---------- | -------------- | ------------------------------------------------------------------ |
 | aspect       | `string`   | `All`          | Filter images by aspect ratio (`Square`, `Wide`, `Tall`, `All`) |
@@ -88,6 +90,7 @@ You may specify your search query's filters with the following settings.
 
 ### Advanced Options
 You do not need to set these parameters under normal circumstances.
+
 | Parameter    | Type       | Default        | Description                                                        |
 | ------------ | ---------- | -------------- | ------------------------------------------------------------------ |
 | offset       | `integer`  | `0`            | [Offset](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#offset) of the initial API call |
