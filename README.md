@@ -55,6 +55,9 @@ const search = require('bing-image-search-async-iterator');
 ```
 
 ## Options
+
+### Basic Options
+These are the main parameters you should specify.
 | Parameter    | Type       | Default        | Description                                                        |
 | ------------ | ---------- | -------------- | ------------------------------------------------------------------ |
 | key          | `string`   |                | **(Required)** [Bing Image Search API](https://azure.microsoft.com/en-us/services/cognitive-services/bing-image-search-api/) Subscription Key |
@@ -62,6 +65,11 @@ const search = require('bing-image-search-async-iterator');
 | amount       | `integer`  | `2000`         | Desired count of results |
 | market       | `string`   |                | [*Market Code*](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#market-codes) of request origin (e.g., `en-US`) |
 | safeSearch   | `string`   | `Moderate`     | [Filter adult content](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#safesearch) (`Off`, `Moderate`, ``Strict``) |
+
+### Filtering Options
+You may specify your search query's filters with the following settings.
+| Parameter    | Type       | Default        | Description                                                        |
+| ------------ | ---------- | -------------- | ------------------------------------------------------------------ |
 | aspect       | `string`   | `All`          | Filter images by aspect ratio (`Square`, `Wide`, `Tall`, `All`) |
 | color        | `string`   |                | Filter images by color (`ColorOnly`, `Monochrome`, `Black`, `Blue`, `Brown`, `Gray`, `Green`, `Orange`, `Pink`, `Purple`, `Red`, `Teal`, `White`, `Yellow`) |
 | imageContent | `string`   |                | Filter images by content type (`Face`, `Portrait`) |
@@ -77,6 +85,11 @@ const search = require('bing-image-search-async-iterator');
 | maxHeight    | `integer`  |                | Filter images by where height is less than or equal to specified value |
 | minFileSize  | `integer`  |                | Filter images by where file size is greater than or equal to specifie value |
 | maxFileSize  | `integer`  |                | Filter images by where file size is less than or equal to specified value |
+
+### Advanced Options
+You do not need to set these parameters under normal circumstances.
+| Parameter    | Type       | Default        | Description                                                        |
+| ------------ | ---------- | -------------- | ------------------------------------------------------------------ |
 | offset       | `integer`  | `0`            | [Offset](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#offset) of the initial API call |
 | count        | `integer`  | `150`          | [Count](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#count) of results per API call (lower this value may result in more API calls) |
 | clientID     | `string`   |                | API request header [`X-MSEdge-ClientID`](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#clientid) (auto-determined if not set) |
