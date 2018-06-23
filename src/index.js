@@ -21,12 +21,10 @@ const HEADERS = {
 const acceptHeaderValue = 'application/json';
 
 function filterNulls(obj) {
-  return Object.assign(
-    ...Object
-      .keys(obj)
-      .filter(key => obj[key] != null)
-      .map(key => ({ [key]: obj[key] })),
-  );
+  return Object
+    .keys(obj)
+    .filter(key => obj[key] != null)
+    .reduce((acc, key) => { acc[key] = obj[key]; return acc; }, { });
 }
 
 function stringify(obj) {
