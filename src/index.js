@@ -1,16 +1,6 @@
 import fetch from 'cross-fetch';
 
 const apiEndPoint = 'https://api.cognitive.microsoft.com/bing/v7.0/images/search';
-const defaults = {
-  key: null,
-  query: null,
-  market: null,
-  safeSearch: null,
-  offset: 0,
-  count: 150,
-  amount: 2000,
-  fetchCb: fetch,
-};
 const HEADERS = {
   API_KEY:      'Ocp-Apim-Subscription-Key',
   CLIENT_ID:    'X-MSEdge-ClientID',
@@ -33,40 +23,40 @@ function stringify(obj) {
     .join('&');
 }
 
-export default async function* search(options) {
-  const {
-    key,
-    query,
-    market,
-    safeSearch,
-    aspect,
-    color,
-    imageContent,
-    imageType,
-    license,
-    freshness,
-    size,
-    width,
-    height,
-    minWidth,
-    minHeight,
-    maxWidth,
-    maxHeight,
-    minFileSize,
-    maxFileSize,
-    offset,
-    count,
-    amount,
-    clientIP,
-    location,
-    queryParams,
-    headerParams,
-    fetchCb,
-  } = Object.assign({ }, defaults, options);
+export default async function* search({
+  key,
+  query,
+  market,
+  safeSearch,
+  aspect,
+  color,
+  imageContent,
+  imageType,
+  license,
+  freshness,
+  size,
+  width,
+  height,
+  minWidth,
+  minHeight,
+  maxWidth,
+  maxHeight,
+  minFileSize,
+  maxFileSize,
+  offset = 0,
+  count = 150,
+  amount = 2000,
+  clientID,
+  clientIP,
+  location,
+  queryParams,
+  headerParams,
+  fetchCb = fetch,
+} = { }) {
   let currOffset = offset;
   let currAmount = amount;
   let available = currOffset + currAmount;
-  let clientID = options.clientID;
+  let responseClientID;
 
   while (currOffset < Math.min(currOffset + currAmount, available)) {
     const requestParams = filterNulls({
@@ -94,7 +84,7 @@ export default async function* search(options) {
     });
     const requestHeaders = filterNulls({
       [HEADERS.API_KEY]:      key,
-      [HEADERS.CLIENT_ID]:    clientID,
+      [HEADERS.CLIENT_ID]:    clientID === undefined ? responseClientID : clientID,
       [HEADERS.CLIENT_IP]:    clientIP,
       [HEADERS.LOCATION]:     location,
       [HEADERS.ACCEPT]:       acceptHeaderValue,
@@ -112,7 +102,7 @@ export default async function* search(options) {
     currOffset = body.nextOffset;
     currAmount -= body.value.length;
     available = body.totalEstimatedMatches;
-    clientID = clientID === undefined ? response.headers.get(HEADERS.CLIENT_ID) : clientID;
+    responseClientID = response.headers.get(HEADERS.CLIENT_ID);
     yield body;
   }
 }
